@@ -1,17 +1,19 @@
-export default class Obstacle {
+// import Obstacle from "./obstacle";
+
+export default class Person {
     constructor(gameScreen){
         this.gameScreen = gameScreen;
-        this.top = Math.floor(Math.random() * 350 + 50);
-        this.left = 900;
+        this.left = Math.floor(Math.random() * 350 + 50);
+        this.top = 600;
+        this.height = 100;
         this.width = 150;
-        this.height = 90;
         this.directionX = 0 ;// horizontal movement direction
         this.directionY = 0 ;
         this.element = document.createElement("img")
-        this.element.src = "./assets/red-car.jpg" 
+        this.element.src = "./assets/walking-man-from-above.png" 
         this.element.style.position = "absolute";
-        this.element.style.width = "150px"
-        this.element.style.marginTop = "150px";
+        this.element.style.width = "50px"
+        //this.element.style.marginBottom = "100px";
         // this.element.style.marginBottom = "50px";
         
     
@@ -24,8 +26,8 @@ export default class Obstacle {
     }
     move(){
     
-    // Move the obstacle left by 3px
-        this.left -= 3.5
+    // Move the obstacle top by 3px
+        this.top -= 3
         this.updatePosition();
     }
 

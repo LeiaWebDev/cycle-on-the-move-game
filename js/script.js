@@ -1,9 +1,9 @@
+import Game from './game.js'
 
-window.onload = function () {
     const startButton = document.getElementById("start-button");
     const restartButton = document.getElementById("restart-button");
     let game;
-    
+    let isMoving = false;
 
     startButton.addEventListener("click", function () {
       startGame();
@@ -11,9 +11,8 @@ window.onload = function () {
   
     function startGame() {
     //   console.log("start game");
-        let game;
-        Game = new Game()
-        Game.start()
+        game = new Game()
+        game.start()
     }
 
 
@@ -30,25 +29,35 @@ window.onload = function () {
       // Check if the pressed key is in the possibleKeystrokes array
       if (possibleKeystrokes.includes(key)) {
         event.preventDefault();
-    
+
+       if (!isMoving) {
+          isMoving = true; // Start the movement
+
         // Update player's directionX and directionY based on the key pressed
         switch (key) {
+
           case "ArrowLeft":
-            Game.player.directionX = -1;
+            game.player.directionX = -2;
             break;
           case "ArrowUp":
-            Game.player.directionY = 1;
+            game.player.directionY = -2;
             break;
           case "ArrowRight":
-            Game.player.directionX = 1;
+            game.player.directionX = 2;
             break;
           case "ArrowDown":
-            Game.player.directionY = -1;
+            game.player.directionY = 2;
             break;
-        }
+            
+        } 
       }
     }
-    
+    // Reset the movement after a short delay (adjust the duration as needed)
+    setTimeout(() => {
+      isMoving = false;
+    }, 400);
+
+  }
     // Add the handleKeydown function as an event listener for the keydown event
     window.addEventListener("keydown", handleKeydown);
 
@@ -62,7 +71,6 @@ window.onload = function () {
         location.reload();
         }
 
-    };
 
 
 
