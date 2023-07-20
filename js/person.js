@@ -1,5 +1,12 @@
 //import Obstacle from "./obstacle.js";
-
+const randomPeopleImages = [
+    './assets/people/walking-man1.png',
+    './assets/people/walking-man2.png',
+    './assets/people/walking-man3.png',
+    './assets/people/walking-woman1.png',
+    './assets/people/walking-woman2.png',
+    './assets/people/walking-woman3.png',
+]
 export default class Person {
     constructor(gameScreen){
         this.gameScreen = gameScreen;
@@ -8,9 +15,9 @@ export default class Person {
         this.height = 50;
         this.width = 70;
         this.directionX = 0 ;// horizontal movement direction
-        this.directionY = 0 ;
+        this.directionY = 0 ;// vertical movement direction
         this.element = document.createElement("img")
-        this.element.src = "./assets/walking-man2.png" 
+        this.element.src = randomPeopleImages[Math.floor(Math.random() * randomPeopleImages.length)]
         this.element.style.position = "absolute";
         //this.element.style.marginBottom = "100px";
         
@@ -23,7 +30,7 @@ export default class Person {
     }
     move(){
     
-    // Move the person top by 3px
+    // Move the person top by 1.5px
         this.top -= 1.5
         this.updatePosition();
     }

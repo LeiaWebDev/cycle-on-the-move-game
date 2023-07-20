@@ -22,6 +22,10 @@ export default class Game {
             this.gameScreen, 100, 70, 80, 60, "./assets/cyclist-top-view.png"
             );
         this.timeStamp = Date.now() 
+        this.personCarCrash = new Audio("./assets/audio/aoooooo-Wilhelm-Scream.mp3")
+        this.bikeCarCrash = new Audio("./assets/audio/Car-Crash-Sound-Effect-Honk.mp3");
+        this.bikePersonCrash = new Audio("./assets/audio/bicycle-bell.mp3")
+        this.gameBackgroundSound = new Audio("./assets/audio/traffic-noise.mp3")
         
     }
 
@@ -31,11 +35,13 @@ export default class Game {
         this.startScreen.style.display = "none";
         this.gameScreen.style.display = "block";
         this.gameLoop();
+        this.gameBackgroundSound.play();
     }
     gameLoop(){
         if(this.gameIsOver){
            return;
         }
+    
         this.update() // the game state
          // loop itself to create a recursive loop
         window.requestAnimationFrame(() => this.gameLoop());
@@ -60,7 +66,7 @@ export default class Game {
 
     generatePeople (newTime, delta) {
         
-        if (Math.random() > 0.997 && this.people.length <33 && delta > 1900){
+        if (Math.random() > 0.996 && this.people.length <35 && delta > 1900){
         // Add people to the game
               this.people.push(new Person(this.gameScreen));
               
@@ -74,13 +80,12 @@ export default class Game {
     obstaclePersonCollisions() {
         for (let i = 0; i < this.obstacles.length; i++) {
             const obstacle = this.obstacles[i];
-            const personCarCrash = new Audio("./assets/aoooooo-Wilhem-Scream.mp3")
             
             for (let j = 0; j < this.people.length; j++) {
-            const person = this.people[j];
+                const person = this.people[j];
                 if (obstacle.didCollide(person)) {
                 // play person car crash sound
-                personCarCrash.play()    
+                this.personCarCrash.play()    
                 // Remove the person element from the DOM
                 person.element.remove();
                 // Remove person from the array
@@ -98,13 +103,12 @@ export default class Game {
         for (let i = 0; i < this.obstacles.length; i++) {
             const obstacle = this.obstacles[i];
             obstacle.move();
-            const bikeCarCrash = new Audio("./assets/Car-Crash-Sound-Effect-Honk.mp3");
             //console.log(obstacle);
 
             // If the player's car collides with an obstacle
             if (this.player.didCollide(obstacle)) {
                 // play the bike crash sound
-                bikeCarCrash.play()
+                this.bikeCarCrash.play()
             // Remove the obstacle element from the DOM  
                 obstacle.element.remove();
                 //remove obstacle from array
@@ -115,7 +119,8 @@ export default class Game {
                 i-=1;
             }
             // If the obstacle is off the screen (at the left)
-            else if (obstacle.left > this.width){
+            else if (obstacle.left + obstacle.width <= 0){
+                // person.top + person.height <= 0
                 // Increase the score by 1
                 this.score += 1
                 // this.score++;
@@ -126,11 +131,6 @@ export default class Game {
                 // Update the counter variable to account for the removed obstacle
                 i+=1;
             }
-
-            // // update live the number of lives on screen 
-            // this.livesDisplay.textContent = `${this.lives}`;
-            // // update live the score on screen 
-            // this.scoreDisplay.textContent = `${this.score}`;
 
         }
     }
@@ -143,10 +143,11 @@ export default class Game {
         for (let j = 0; j < this.people.length; j++) {
             const person = this.people[j];
             person.move();
-            
         
             // If the player's bike collides with a person
             if (this.player.didCollide(person)) {
+                // play sound on crash when player hits a person
+                this.bikePersonCrash.play()
             // Remove the person element from the DOM  
                 person.element.remove();
                 //remove person from array
@@ -158,7 +159,7 @@ export default class Game {
             }
 
             // If the person is off the screen (at the top)
-            else if (person.left > this.height){ /// person.top
+            else if (person.top + person.height <= 0){ /// 
                 // Increase the score by 1
                 this.score += 1
                 // Remove the perrson from the DOM
@@ -177,7 +178,7 @@ export default class Game {
         const delta = newTime - this.timeStamp;
         
         this.player.move();  
-         
+        
         this.generateObstacles (newTime, delta);
         this.generatePeople (newTime, delta);
         this.obstaclePersonCollisions()
@@ -209,7 +210,7 @@ export default class Game {
         this.gameScreen.style.display = "none";
         // Show end game screen
         this.gameEndScreen.style.display = "block";
-        this.gameEndScreen.style.backgroundImage = "cyclist-crash.jpg"
+        this.gameEndScreen.style.backgroundImage = "./assets/cyclist-crash.jpg"
 
     }
     

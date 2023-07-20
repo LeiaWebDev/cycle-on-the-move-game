@@ -1,3 +1,14 @@
+const randomCarsImages = [
+    './assets/cars/blue-car-big.png',
+    './assets/cars/blue-car-deluxe.png',
+    './assets/cars/blue-car-roofoff.png',
+    './assets/cars/red-car.png',
+    './assets/cars/bus.png',
+    './assets/cars/grey-car-long.png',
+    './assets/cars/pink-car.png',
+    './assets/cars/yellow-car.png',
+    './assets/cars/yellow-car-luxe.png',
+]
 export default class Obstacle {
     constructor(gameScreen){
         this.gameScreen = gameScreen;
@@ -8,7 +19,7 @@ export default class Obstacle {
         this.directionX = 0 ;// horizontal movement direction
         this.directionY = 0 ;
         this.element = document.createElement("img");
-        this.element.src = "./assets/red-car.png" ;
+        this.element.src = randomCarsImages[Math.floor(Math.random() * randomCarsImages.length)]
         this.element.style.position = "absolute";
         this.element.style.width = "150px";
         this.element.style.marginTop = "150px";
@@ -25,7 +36,7 @@ export default class Obstacle {
     move(){
     
     // Move the obstacle left by 3px
-        this.left -= 3.5
+        this.left -= 3
         this.updatePosition();
     }
 
