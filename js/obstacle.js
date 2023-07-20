@@ -8,7 +8,7 @@ export default class Obstacle {
         this.directionX = 0 ;// horizontal movement direction
         this.directionY = 0 ;
         this.element = document.createElement("img");
-        this.element.src = "./assets/red-car.jpg" ;
+        this.element.src = "./assets/red-car.png" ;
         this.element.style.position = "absolute";
         this.element.style.width = "150px";
         this.element.style.marginTop = "150px";

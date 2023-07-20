@@ -6,16 +6,16 @@ export default class Player {
     this.gameScreen = gameScreen;
     this.left = left; // the horizontal move left position of the bike
     this.top = top; // the vertical up position of the bike 
-    this.width = width;
+    this.width = 100;
     this.height = height;
     this.directionX = 0 ; // horizontal movement direction
     this.directionY = 0 ; // vertical movement direction
     this.element = document.createElement("img") // the image element representing the bike 
-    this.element.src = "./assets/cyclist-riding-above-boy.jpg"
+    this.element.src = "./assets/cyclist-top-view.png"
     this.element.style.position = "absolute";
     this.element.style.left = "10px";
     this.element.style.marginTop = "150px";
-    this.element.style.width = "150px"
+    // this.element.style.width = "150px"
 
     this.element.style.height = `${this.height} px`
     this.element.style.width = `${this.width} px`

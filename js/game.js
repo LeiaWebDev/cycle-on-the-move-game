@@ -10,7 +10,7 @@ export default class Game {
         this.gameEndScreen = document.getElementById('game-end')
         this.player = null;
         this.height = 600;
-        this.width = 1100;
+        this.width = 1200;
         this.obstacles = [];
         this.people = []; // add the new obstacles
         this.scoreDisplay = document.getElementById('score');
@@ -19,9 +19,10 @@ export default class Game {
         this.lives = 3;
         this.gameIsOver = false;
         this.player = new Player (
-            this.gameScreen, 100, 70, 80, 60, "./assets/cyclist-riding-above-boy.jpg"
+            this.gameScreen, 100, 70, 80, 60, "./assets/cyclist-top-view.png"
             );
         this.timeStamp = Date.now() 
+        
         
     }
 
@@ -71,13 +72,17 @@ export default class Game {
               
             }; 
 
+    // create method to check for car person collision            
     obstaclePersonCollisions() {
         for (let i = 0; i < this.obstacles.length; i++) {
             const obstacle = this.obstacles[i];
-        
+            const personCarCrash = new Audio("./assets/aoooooo-Wilhem-Scream.mp3")
+            
             for (let j = 0; j < this.people.length; j++) {
             const person = this.people[j];
                 if (obstacle.didCollide(person)) {
+                // play person car crash sound
+                personCarCrash.play()    
                 // Remove the person element from the DOM
                 person.element.remove();
                 // Remove person from the array
@@ -104,11 +109,13 @@ export default class Game {
         for (let i = 0; i < this.obstacles.length; i++) {
             const obstacle = this.obstacles[i];
             obstacle.move();
-        
+            const bikeCarCrash = new Audio("./assets/Car-Crash-Sound-Effect-Honk.mp3");
             //console.log(obstacle);
 
             // If the player's car collides with an obstacle
             if (this.player.didCollide(obstacle)) {
+                // play the bike crash sound
+                bikeCarCrash.play()
             // Remove the obstacle element from the DOM  
                 obstacle.element.remove();
                 //remove obstacle from array
@@ -158,7 +165,7 @@ export default class Game {
                 j-=1;
             }
 
-            // If the person is off the screen (at the left)
+            // If the person is off the screen (at the top)
             else if (person.top > this.height){
                 // Increase the score by 1
                 this.score += 1
@@ -201,6 +208,7 @@ export default class Game {
         this.gameScreen.style.display = "none";
         // Show end game screen
         this.gameEndScreen.style.display = "block";
+        this.gameEndScreen.style.backgroundImage = "cyclist-crash.jpg"
 
     }
     

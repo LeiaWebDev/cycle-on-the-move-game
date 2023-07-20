@@ -10,7 +10,7 @@ export default class Person {
         this.directionX = 0 ;// horizontal movement direction
         this.directionY = 0 ;
         this.element = document.createElement("img")
-        this.element.src = "./assets/walking-man-from-above.png" 
+        this.element.src = "./assets/walking-man2.png" 
         this.element.style.position = "absolute";
         //this.element.style.marginBottom = "100px";
         
