@@ -4,7 +4,7 @@ export default class Person {
     constructor(gameScreen){
         this.gameScreen = gameScreen;
         this.left = Math.floor(Math.random() * 800 + 50);
-        this.top = 600;
+        this.top = 600; 
         this.height = 50;
         this.width = 70;
         this.directionX = 0 ;// horizontal movement direction

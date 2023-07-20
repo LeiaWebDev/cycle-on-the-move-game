@@ -44,7 +44,7 @@ body {
   #game-screen {
     display: none;
     align-content: center;
-    padding: 20px 0px;
+    padding: 20px 10px;
     overflow: hidden;
     position: relative;
     background-image: url(../assets/horizontal-road-4differentlanes.png);
@@ -55,13 +55,14 @@ body {
   
   @keyframes slide {
     0% {
-      background-position: -1000px 0px;
+      background-position: 0px 0px; 
+      /* -1000 */
     }
-    95% {
+    /* 95% {
       background-position: 0 0;
-    }
+    } */
     100% {
-      background-position: 0 50px;
+      background-position: -1000px 0px;
     }
   }
   

@@ -10,7 +10,7 @@ export default class Game {
         this.gameEndScreen = document.getElementById('game-end')
         this.player = null;
         this.height = 600;
-        this.width = 1200;
+        this.width = 1150;
         this.obstacles = [];
         this.people = []; // add the new obstacles
         this.scoreDisplay = document.getElementById('score');
@@ -23,7 +23,6 @@ export default class Game {
             );
         this.timeStamp = Date.now() 
         
-        
     }
 
     start (){
@@ -34,7 +33,6 @@ export default class Game {
         this.gameLoop();
     }
     gameLoop(){
-        // console.log("loop")
         if(this.gameIsOver){
            return;
         }
@@ -94,17 +92,8 @@ export default class Game {
         }
     }                    
 
-    update(){
-        const newTime = Date.now();
-        const delta = newTime - this.timeStamp;
-        // this.player.updatePosition();
-        this.player.move();  
-         
-        this.generateObstacles (newTime, delta);
-        this.generatePeople (newTime, delta);
-        this.obstaclePersonCollisions()
 
-
+    obstaclePlayerCollisions() {
         // Check for collision and if an obstacle is still on the screen
         for (let i = 0; i < this.obstacles.length; i++) {
             const obstacle = this.obstacles[i];
@@ -138,13 +127,16 @@ export default class Game {
                 i+=1;
             }
 
-            // update live the number of lives on screen 
-            this.livesDisplay.textContent = `${this.lives}`;
-            // update live the score on screen 
-            this.scoreDisplay.textContent = `${this.score}`;
+            // // update live the number of lives on screen 
+            // this.livesDisplay.textContent = `${this.lives}`;
+            // // update live the score on screen 
+            // this.scoreDisplay.textContent = `${this.score}`;
 
         }
-           
+    }
+
+
+    personPlayerCollisions(){
 
         // / Check for collision and if a person is still on the screen
         //for people ====================
@@ -166,7 +158,7 @@ export default class Game {
             }
 
             // If the person is off the screen (at the top)
-            else if (person.top > this.height){
+            else if (person.left > this.height){ /// person.top
                 // Increase the score by 1
                 this.score += 1
                 // Remove the perrson from the DOM
@@ -174,19 +166,28 @@ export default class Game {
                 // Remove person object from the array
                 this.people.splice(j,1)
                 // Update the counter variable to account for the removed obstacle
-                j+=1;
+                j-=1;
             }
-
-                // update live the number of lives on screen 
-                this.livesDisplay.textContent = `${this.lives}`;
-                // update live the score on screen 
-                this.scoreDisplay.textContent = `${this.score}`;
-
-                //console.log(this.player.didCollide(person))
         
         }
+    }
 
+    update(){
+        const newTime = Date.now();
+        const delta = newTime - this.timeStamp;
+        
+        this.player.move();  
+         
+        this.generateObstacles (newTime, delta);
+        this.generatePeople (newTime, delta);
+        this.obstaclePersonCollisions()
+        this.obstaclePlayerCollisions()
+        this.personPlayerCollisions()
 
+        // update live the number of lives on screen 
+        this.livesDisplay.textContent = `${this.lives}`;
+        // update live the score on screen 
+        this.scoreDisplay.textContent = `${this.score}`;
 
         // for obstacles and people
         // If the lives are 0, end the game
