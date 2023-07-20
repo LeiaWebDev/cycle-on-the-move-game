@@ -7,10 +7,10 @@ export default class Obstacle {
         this.height = 90;
         this.directionX = 0 ;// horizontal movement direction
         this.directionY = 0 ;
-        this.element = document.createElement("img")
-        this.element.src = "./assets/red-car.jpg" 
+        this.element = document.createElement("img");
+        this.element.src = "./assets/red-car.jpg" ;
         this.element.style.position = "absolute";
-        this.element.style.width = "150px"
+        this.element.style.width = "150px";
         this.element.style.marginTop = "150px";
         // this.element.style.marginBottom = "50px";
         
@@ -33,4 +33,24 @@ export default class Obstacle {
         this.element.style.left = `${this.left}px`
         this.element.style.top = `${this.top}px`
     }
+
+    // check for collision with people
+    didCollide(person){
+        // Checks if the obstacle  collides with a person
+        const obstacleRect = this.element.getBoundingClientRect();
+        const personRect = person.element.getBoundingClientRect();
+        if (
+            obstacleRect.left <= personRect.right &&
+            obstacleRect.right >= personRect.left &&
+            obstacleRect.top <= personRect.bottom &&
+            obstacleRect.bottom >= personRect.top 
+            ) {
+            return true
+        } else {
+            return false
+        }
+
+
+    }
+    
 }

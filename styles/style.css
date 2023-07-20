@@ -1,21 +1,48 @@
+
 body {
     padding: 0;
+    margin: 0;
     text-align: center;
+    background-image: url(../assets/background-city-bikelady.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    /* display: flex; */
+    /* width: 100%; */
   }
   
   #game-intro {
     padding: 20px 0px;
+    /* display: block;
+    justify-content: center;
+    align-items: center; */
+
+    
   }
   
   #game-container {
-    /* display: flex; */
-    /* width: 150vw; */
+    display: flex;
+    /* width: 150vw;
+    height: 50px; */
     padding: 20px 0px;
     justify-content: center;
+    align-items: end;
   }
   
+  #stats{
+    border-color: rgb(14, 87, 62);
+    border-style: groove;
+    background-color: aquamarine;
+    padding : 20px;
+    display: block;
+    /* align-items: center;
+    justify-content: center; */
+
+  }
+
+
   #game-screen {
-    /* display: none; */
+    display: none;
     align-content: center;
     padding: 20px 0px;
     overflow: hidden;
@@ -40,6 +67,9 @@ body {
   
   #game-end {
     display: none;
+    /* display: block; */
+    text-align: center;
+
   }
   
   .game-intro p {

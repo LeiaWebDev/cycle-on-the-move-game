@@ -42,22 +42,72 @@ export default class Game {
         window.requestAnimationFrame(() => this.gameLoop());
     }
 
-    update(){
-        const newTime = Date.now()
-        const delta = newTime - this.timeStamp;
-        // console.log(this.people)
+    
+
+    // generate all my obstacles and people============================
+
+    // Create a new obstacle based on a random probability when there is no other obstacles on the screen
+
+    generateObstacles (newTime, delta) {
         
-        //console.log("update") 
+        if (Math.random() > 0.995 && this.obstacles.length < 40 && delta > 1000){
+              // Add a car to the game
+          this.obstacles.push(new Obstacle(this.gameScreen));
+          // avoid overlapping by delaying the generation of each person
+          this.timeStamp = newTime
+        }
+      
+        }; 
+
+    generatePeople (newTime, delta) {
+        
+        if (Math.random() > 0.997 && this.people.length <33 && delta > 1900){
+        // Add people to the game
+              this.people.push(new Person(this.gameScreen));
+              
+            // avoid overlapping by delaying the generation of each person
+              this.timeStamp = newTime
+            }
+              
+            }; 
+
+    obstaclePersonCollisions() {
+        for (let i = 0; i < this.obstacles.length; i++) {
+            const obstacle = this.obstacles[i];
+        
+            for (let j = 0; j < this.people.length; j++) {
+            const person = this.people[j];
+                if (obstacle.didCollide(person)) {
+                // Remove the person element from the DOM
+                person.element.remove();
+                // Remove person from the array
+                 this.people.splice(j, 1);
+                // Update the counter variable to account for the removed person
+                j -= 1;
+                }
+            }
+        }
+    }                    
+
+    update(){
+        const newTime = Date.now();
+        const delta = newTime - this.timeStamp;
         // this.player.updatePosition();
         this.player.move();  
+         
+        this.generateObstacles (newTime, delta);
+        this.generatePeople (newTime, delta);
+        this.obstaclePersonCollisions()
 
-    // Check for collision and if an obstacle is still on the screen
+
+        // Check for collision and if an obstacle is still on the screen
         for (let i = 0; i < this.obstacles.length; i++) {
             const obstacle = this.obstacles[i];
             obstacle.move();
         
-    // If the player's car collides with an obstacle
+            //console.log(obstacle);
 
+            // If the player's car collides with an obstacle
             if (this.player.didCollide(obstacle)) {
             // Remove the obstacle element from the DOM  
                 obstacle.element.remove();
@@ -68,7 +118,7 @@ export default class Game {
                 // Update the counter variable to account for the removed obstacle
                 i-=1;
             }
-    // If the obstacle is off the screen (at the left)
+            // If the obstacle is off the screen (at the left)
             else if (obstacle.left > this.width){
                 // Increase the score by 1
                 this.score += 1
@@ -78,66 +128,57 @@ export default class Game {
                 // Remove obstacle object from the array
                 this.obstacles.splice(i,1)
                 // Update the counter variable to account for the removed obstacle
-                i-=1;
+                i+=1;
             }
 
-        // update live the number of lives on screen 
-        this.livesDisplay.textContent = `${this.lives}`;
-        // update live the score on screen 
-        this.scoreDisplay.textContent = `${this.score}`;
-        
+            // update live the number of lives on screen 
+            this.livesDisplay.textContent = `${this.lives}`;
+            // update live the score on screen 
+            this.scoreDisplay.textContent = `${this.score}`;
 
-        // Create a new obstacle based on a random probability
-        // when there is no other obstacles on the screen
-        if (Math.random() > 0.995 && this.obstacles.length < 70 && delta > 500) {
-            this.obstacles.push(new Obstacle(this.gameScreen));
         }
-
-
-
            
 
-            // for people ====================
-        // for (let i = 0; i < this.people.length; i++) {
-        //     const person = this.people[i];
-        //     person.move();
+        // / Check for collision and if a person is still on the screen
+        //for people ====================
+        for (let j = 0; j < this.people.length; j++) {
+            const person = this.people[j];
+            person.move();
+            
         
-        //     // If the player's bike collides with a person
-        //     if (this.player.didCollide(person)) {
-        //     // Remove the person element from the DOM  
-        //         person.element.remove();
-        //         //remove person from array
-        //         this.people.splice(i, 1);
-        //         // Reduce player's lives by 1
-        //         this.lives -= 1;
-        //         // Update the counter variable to account for the removed person
-        //         i-=1;
-        //     }
-        //     // If the person is off the screen (at the left)
-        //     else if (person.top > this.height){
-        //         // Increase the score by 1
-        //         this.score += 1
-        //         // Remove the perrson from the DOM
-        //         person.element.remove();
-        //         // Remove person object from the array
-        //         this.people.splice(i,1)
-        //         // Update the counter variable to account for the removed obstacle
-        //         i-=1;
-        //     }
+            // If the player's bike collides with a person
+            if (this.player.didCollide(person)) {
+            // Remove the person element from the DOM  
+                person.element.remove();
+                //remove person from array
+                this.people.splice(j, 1);
+                // Reduce player's lives by 1
+                this.lives -= 1;
+                // Update the counter variable to account for the removed person
+                j-=1;
+            }
 
-        //         // update live the number of lives on screen 
-        //         this.livesDisplay.textContent = `${this.lives}`;
-        //         // update live the score on screen 
-        //         this.scoreDisplay.textContent = `${this.score}`;
+            // If the person is off the screen (at the left)
+            else if (person.top > this.height){
+                // Increase the score by 1
+                this.score += 1
+                // Remove the perrson from the DOM
+                person.element.remove();
+                // Remove person object from the array
+                this.people.splice(j,1)
+                // Update the counter variable to account for the removed obstacle
+                j+=1;
+            }
+
+                // update live the number of lives on screen 
+                this.livesDisplay.textContent = `${this.lives}`;
+                // update live the score on screen 
+                this.scoreDisplay.textContent = `${this.score}`;
+
+                //console.log(this.player.didCollide(person))
         
-        // }
-
-        // Create a new person based on a random probability
-        // when there is no other person on the screen
-        console.log(this.people)
-        if (Math.random() > 0.9 && this.people.length < 10 && delta > 500) {
-            this.people.push(new Person(this.gameScreen));
         }
+
 
 
         // for obstacles and people
@@ -148,7 +189,6 @@ export default class Game {
 
     };
 
-    }
 
     // Create a new method responsible for ending the game
     endGame(){

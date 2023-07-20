@@ -7,7 +7,6 @@
     
     <script type="module" src="./js/script.js"></script>
     <!-- <script type="module" src="./js/game.js"></script>
-    
     <script type="module" src="./js/player.js"></script>
     <script type="module" src="./js/obstacle.js"></script> -->
     
@@ -17,15 +16,15 @@
     <main>
         <!-- game intro -->
         <div id="game-intro">
-            <img src="./assets/cyclist.jpg" alt="" class="logo-img" />
-            <br />
+            <!-- <img src="./assets/cyclist.jpg" alt="" class="logo-img" /> -->
+            <!-- <br/> -->
             <button id="start-button">Start Game</button>
-            <p>Use the up, down, left and right arrows to control the bike!</p>
+            <p>Use arrows to control the bike!</p>
             <img src="./assets/arrows.png" alt="cyclist" class="arrows-img" />
         </div>
 
         <div id="game-container">
-            <div>
+            <div id="stats">
               <h2>Stats</h2>
               <p>Score: <span id="score">0</span></p>
               <p>Lives: <span id="lives">3</span></p>
@@ -36,7 +35,7 @@
 
         <!-- #game-end is initially hidden using CSS style display: none -->
       <div id="game-end">
-        <img src="./assets/cyclist.jpg" alt="cyclist" class="logo-img" />
+        <!-- <img src="./assets/cyclist.jpg" alt="cyclist" class="logo-img" /> -->
         <h1>Game Over</h1>
         <br />
         <button id="restart-button">Restart</button>

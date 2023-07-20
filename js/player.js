@@ -1,3 +1,6 @@
+import Person from "./person.js";
+import Obstacle from "./obstacle.js";
+
 export default class Player {
     constructor(gameScreen, left, top, width, height){
     this.gameScreen = gameScreen;
@@ -12,7 +15,6 @@ export default class Player {
     this.element.style.position = "absolute";
     this.element.style.left = "10px";
     this.element.style.marginTop = "150px";
-    // this.element.style.marginBottom = "150px";
     this.element.style.width = "150px"
 
     this.element.style.height = `${this.height} px`
@@ -58,7 +60,7 @@ updatePosition(){
 }
 
 
-// check for collision for obstacles
+// check for collision with obstacles
 didCollide(obstacle){
     // Checks if the player's bike collides with an obstacle
     const playerRect = this.element.getBoundingClientRect();
@@ -77,7 +79,7 @@ didCollide(obstacle){
 
 }
 
-// check for collision for people
+// check for collision with people
 didCollide(person){
     // Checks if the player's bike collides with a person
     const playerRect = this.element.getBoundingClientRect();
@@ -95,10 +97,6 @@ didCollide(person){
 
 
 }
-
-
-
-
 
 
 
