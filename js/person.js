@@ -10,7 +10,7 @@ const randomPeopleImages = [
 export default class Person {
     constructor(gameScreen){
         this.gameScreen = gameScreen;
-        this.left = Math.floor(Math.random() * 800 + 50);
+        this.left = Math.floor(Math.random() * 850 + 30);
         this.top = 600; 
         this.height = 50;
         this.width = 70;
@@ -31,7 +31,8 @@ export default class Person {
     move(){
     
     // Move the person top by 1.5px
-        this.top -= 1.5
+        this.left -= 0.5
+        this.top -= 1.7
         this.updatePosition();
     }
 

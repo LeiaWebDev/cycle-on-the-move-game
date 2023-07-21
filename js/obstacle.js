@@ -1,9 +1,9 @@
 const randomCarsImages = [
     './assets/cars/blue-car-big.png',
-    './assets/cars/blue-car-deluxe.png',
-    './assets/cars/blue-car-roofoff.png',
+    './assets/cars/green-car.png',
+    './assets/cars/orange-car.png',
+    './assets/cars/black-car.png',
     './assets/cars/red-car.png',
-    './assets/cars/bus.png',
     './assets/cars/grey-car-long.png',
     './assets/cars/pink-car.png',
     './assets/cars/yellow-car.png',
@@ -12,8 +12,8 @@ const randomCarsImages = [
 export default class Obstacle {
     constructor(gameScreen){
         this.gameScreen = gameScreen;
-        this.top = Math.floor(Math.random() * 350 + 50);
-        this.left = 900;
+        this.top = Math.floor(Math.random() * 350 + 20);
+        this.left = 1100;
         this.width = 150;
         this.height = 90;
         this.directionX = 0 ;// horizontal movement direction

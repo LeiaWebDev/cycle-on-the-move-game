@@ -55,7 +55,7 @@ export default class Game {
 
     generateObstacles (newTime, delta) {
         
-        if (Math.random() > 0.995 && this.obstacles.length < 40 && delta > 1000){
+        if (Math.random() > 0.987 && this.obstacles.length < 200 && delta > 1200){
               // Add a car to the game
           this.obstacles.push(new Obstacle(this.gameScreen));
           // avoid overlapping by delaying the generation of each person
@@ -66,7 +66,7 @@ export default class Game {
 
     generatePeople (newTime, delta) {
         
-        if (Math.random() > 0.996 && this.people.length <35 && delta > 1900){
+        if (Math.random() > 0.992 && this.people.length <180 && delta > 1900){
         // Add people to the game
               this.people.push(new Person(this.gameScreen));
               
