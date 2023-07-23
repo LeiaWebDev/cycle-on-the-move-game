@@ -23,9 +23,6 @@ export default class Obstacle {
         this.element.style.position = "absolute";
         this.element.style.width = "150px";
         this.element.style.marginTop = "150px";
-        // this.element.style.marginBottom = "50px";
-        
-    
         this.element.style.height = `${this.height}px`
         this.element.style.width = `${this.width}px`
         this.element.style.left = `${this.left}px`
@@ -34,7 +31,6 @@ export default class Obstacle {
         this.gameScreen.append(this.element)
     }
     move(){
-    
     // Move the obstacle left by 3px
         this.left -= 3
         this.updatePosition();

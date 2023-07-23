@@ -15,7 +15,6 @@ export default class Player {
     this.element.style.position = "absolute";
     this.element.style.left = "10px";
     this.element.style.marginTop = "150px";
-    // this.element.style.width = "150px"
 
     this.element.style.height = `${this.height} px`
     this.element.style.width = `${this.width} px`
@@ -40,9 +39,6 @@ move(){
    if (this.left > this.gameScreen.offsetWidth - this.width - 10) {
     this.left = this.gameScreen.offsetWidth - this.width - 10;
   }
-//   if (this.top > this.gameScreen.offsetHeight - this.height - 10) {
-//     this.top = this.gameScreen.offsetHeight - this.height - 10;
-//   }
 
 // Restrict the player's position within 150 pixels from the bottom of the screen
     const marginBottom = this.gameScreen.offsetHeight - this.height - 150;
@@ -59,7 +55,6 @@ updatePosition(){
     this.element.style.top = `${this.top}px`
 }
 
-
 // check for collision with obstacles
 didCollide(obstacle){
     // Checks if the player's bike collides with an obstacle
@@ -75,8 +70,6 @@ didCollide(obstacle){
     } else {
         return false
     }
-
-
 }
 
 // check for collision with people
@@ -94,12 +87,7 @@ didCollide(person){
     } else {
         return false
     }
-
-
 }
-
-
-
 }
 
 
